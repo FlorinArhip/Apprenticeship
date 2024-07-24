@@ -1,7 +1,6 @@
 package com.endava;
 
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -163,7 +162,7 @@ public class ControllerTests {
 
         this.mockMvc.perform(get("/api/recipe/all"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[*].name").value(contains(recipeName)));
+                .andExpect(jsonPath("$[*].name", hasItem(recipeName)));
     }
 
     // External service call - 500 INTERNAL SERVER ERROR
